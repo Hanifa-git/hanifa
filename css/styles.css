@@ -3199,7 +3199,7 @@ img.u-pull-left {
     min-height      : calc(25.5 * var(--space));
     justify-content : center;
     align-items     : center;
-    padding-top     : calc(16vh + var(--header-height));
+    padding-top     : calc(12vh + var(--header-height));
     padding-bottom  : var(--vspace-3);
 }
 
@@ -3394,8 +3394,8 @@ img.u-pull-left {
  * ------------------------------------------------------------------- */
 
 .s-about {
-    padding-top    : var(--vspace-4);
-    padding-bottom : var(--vspace-3);
+    padding-top    : var(--vspace-2);
+    padding-bottom : var(--vspace-1);
 }
 
 /* --------------------------------------------------------------------
@@ -3431,7 +3431,7 @@ img.u-pull-left {
  * ## about expertise
  * -------------------------------------------------------------------- */
 .about-expertise {
-    padding-top : calc(6 * var(--space));
+    padding-top : calc(3 * var(--space));
 }
 
 .about-expertise .skills-list {
@@ -3585,8 +3585,8 @@ img.u-pull-left {
  * ------------------------------------------------------------------- */
 
 .s-works {
-    padding-top    : var(--vspace-5);
-    padding-bottom : var(--vspace-3_5);
+    padding-top    : var(--vspace-1);
+    padding-bottom : var(--vspace-2_5);
 }
 
 .s-works .h1 {
@@ -4038,7 +4038,7 @@ img.u-pull-left {
  * ------------------------------------------------------------------- */
 
 .contact-top {
-    padding-top : var(--vspace-5);
+    padding-top : var(--vspace-2);
     border-top  : 1px solid var(--color-border);
 }
 
