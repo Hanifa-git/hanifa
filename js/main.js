@@ -252,17 +252,59 @@
 
         folioLinks.forEach(function(link) {
             let modalbox = link.getAttribute('href');
+            let modalElement = document.querySelector(modalbox);
+            
             let instance = basicLightbox.create(
-                document.querySelector(modalbox),
+                modalElement,
                 {
                     onShow: function(instance) {
+                        // Get scroll position from the instance (saved before modal opened)
+                        const scrollPosition = instance._scrollPosition || (window.pageYOffset || document.documentElement.scrollTop);
+                        
+                        // Prevent body scrolling when modal is open
+                        document.body.style.overflow = 'hidden';
+                        document.body.style.position = 'fixed';
+                        document.body.style.top = '-' + scrollPosition + 'px';
+                        document.body.style.width = '100%';
+                        document.documentElement.style.overflow = 'hidden';
+                        
                         //detect Escape key press
-                        document.addEventListener("keydown", function(event) {
+                        const escapeHandler = function(event) {
                             event = event || window.event;
                             if (event.keyCode === 27) {
                                 instance.close();
+                                document.removeEventListener("keydown", escapeHandler);
                             }
-                        });
+                        };
+                        document.addEventListener("keydown", escapeHandler);
+                        
+                        // Add close button functionality - query from the visible modal element
+                        const visibleModal = instance.element();
+                        const closeBtn = visibleModal.querySelector('.modal-popup__close');
+                        if (closeBtn) {
+                            const closeHandler = function(event) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                instance.close();
+                            };
+                            closeBtn.addEventListener("click", closeHandler);
+                        }
+                    },
+                    onClose: function(instance) {
+                        // Get the saved scroll position
+                        const scrollPosition = instance._scrollPosition || 0;
+                        
+                        // Restore body scrolling
+                        document.body.style.overflow = '';
+                        document.body.style.position = '';
+                        document.body.style.top = '';
+                        document.body.style.width = '';
+                        document.documentElement.style.overflow = '';
+                        
+                        // Restore scroll position after a brief delay to ensure styles are reset
+                        setTimeout(function() {
+                            window.scrollTo(0, scrollPosition);
+                        }, 10);
                     }
                 }
             )
@@ -272,6 +314,13 @@
         folioLinks.forEach(function(link, index) {
             link.addEventListener("click", function(event) {
                 event.preventDefault();
+                
+                // Save scroll position BEFORE opening the modal
+                const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // Store scroll position in the modal instance
+                modals[index]._scrollPosition = scrollPosition;
+                
                 modals[index].show();
             });
         });

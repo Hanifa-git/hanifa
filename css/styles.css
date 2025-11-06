@@ -3764,18 +3764,114 @@ img.u-pull-left {
 /* ------------------------------------------------------------------- 
  * ## modal popup
  * ------------------------------------------------------------------- */
+/* Hide the basicLightbox default close button and prevent scrolling */
+.basicLightbox:has(.modal-popup)::after,
+.basicLightbox--visible:has(.modal-popup)::after {
+    display : none !important;
+}
+
+.basicLightbox:has(.modal-popup),
+.basicLightbox--visible:has(.modal-popup) {
+    overflow : hidden !important;
+}
+
+/* Prevent body scrolling when modal is open */
+body:has(.basicLightbox--visible),
+html:has(.basicLightbox--visible) {
+    overflow : hidden !important;
+    height   : 100% !important;
+}
+
+/* Modal close button - positioned at top-right outside the image */
+.modal-popup__close {
+    position         : fixed;
+    top              : 24px;
+    right            : 14px;
+    z-index          : 10000;
+    width            : auto;
+    height           : auto;
+    min-width        : auto;
+    min-height       : auto;
+    background-color : transparent !important;
+    border           : none;
+    border-radius    : 0;
+    color            : #e2a850;
+    font-size        : 2.4rem;
+    font-weight      : 300;
+    line-height      : 1;
+    font-family      : Arial, sans-serif;
+    cursor           : pointer;
+    display          : flex;
+    align-items      : center;
+    justify-content  : center;
+    transition       : opacity 0.3s ease;
+    padding          : 0;
+    margin           : 0;
+    box-sizing       : border-box;
+}
+
+.modal-popup__close:hover,
+.modal-popup__close:active {
+    background-color : transparent !important;
+    background       : transparent !important;
+    opacity          : 0.7;
+}
+
+.modal-popup__close:focus {
+    background-color : transparent !important;
+    background       : transparent !important;
+    outline          : 2px solid #ffffff;
+    outline-offset   : 2px;
+}
+
+
+/* Override basicLightbox placeholder for full-width modals */
+.basicLightbox__placeholder:has(.modal-popup) {
+    max-width        : 100% !important;
+    width            : 100% !important;
+    height           : 100vh !important;
+    max-height       : 100vh !important;
+    transform        : none !important;
+    display          : flex !important;
+    align-items      : flex-start !important;
+    justify-content  : center !important;
+    padding          : 0 !important;
+    overflow         : hidden !important;
+}
+
+/* Fallback for browsers without :has() support */
+.basicLightbox__placeholder .modal-popup {
+    max-width : calc(100% - (2 * var(--vspace-2))) !important;
+    width     : calc(100% - (2 * var(--vspace-2))) !important;
+    margin    : var(--vspace-2) var(--vspace-2) 0 var(--vspace-2) !important;
+}
+
 .modal-popup {
-    max-width        : 680px;
+    max-width        : calc(100% - (2 * var(--vspace-2)));
+    width            : calc(100% - (2 * var(--vspace-2)));
+    max-height       : calc(100vh - var(--vspace-2));
+    height           : calc(100vh - var(--vspace-2));
     background-color : white;
     font-size        : calc(var(--text-size) * 0.9447);
     line-height      : var(--vspace-0_875);
     color            : rgba(0, 0, 0, 0.75);
     overflow-y       : auto;
-    position         : relative;
+    overflow-x       : hidden;
+    /* position         : relative; */
+    margin           : var(--vspace-2) var(--vspace-2) 0 var(--vspace-2);
+    padding          : 0;
+    box-sizing       : border-box;
+    align-self       : flex-start;
+    z-index          : 1;
 }
 
 .modal-popup img {
+    width         : 100%;
+    height        : auto;
+    display       : block;
     margin-bottom : var(--vspace-0_75);
+    object-fit    : contain;
+    padding       : 0;
 }
 
 .modal-popup h5 {
@@ -3789,7 +3885,8 @@ img.u-pull-left {
 }
 
 .modal-popup__desc {
-    padding : 0 var(--vspace-1_25) var(--vspace-0_25);
+    padding : var(--vspace-1_25) var(--vspace-1_25) var(--vspace-0_25);
+    max-width : 100%;
 }
 
 .modal-popup__cat {
@@ -4026,6 +4123,19 @@ img.u-pull-left {
 
     .modal-popup__desc {
         padding : 0 var(--vspace-1) var(--vspace-0_25);
+    }
+
+    .modal-popup {
+        max-width  : calc(100% - (2 * var(--vspace-1)));
+        width      : calc(100% - (2 * var(--vspace-1)));
+        max-height : calc(100vh - var(--vspace-1));
+        margin     : var(--vspace-1) var(--vspace-1) 0 var(--vspace-1);
+    }
+
+    .modal-popup__close {
+        top       : var(--vspace-1);
+        right     : var(--vspace-1);
+        font-size : 2rem;
     }
 }
 

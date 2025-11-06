@@ -808,7 +808,7 @@ button.swiper-pagination-bullet {
 
 .basicLightbox::after {
     content             : "";
-    position            : absolute;
+    position            : absolute !important;
     top                 : 1.8rem;
     right               : 1.8rem;
     width               : 2em;
