@@ -3927,10 +3927,10 @@ html:has(.basicLightbox--visible) {
 }
 
 .modal-popup__details {
-    background-color : #eabe7b;
+    background-color : #eabe7b!important;
     font-size        : var(--text-xs);
     line-height      : var(--vspace-1_25);
-    color            : white;
+    color            : rgb(0, 0, 0);
     padding          : 0 1.2rem;
     position         : absolute;
     top              : var(--vspace-1);
@@ -3940,7 +3940,7 @@ html:has(.basicLightbox--visible) {
 .modal-popup__details:focus,
 .modal-popup__details:hover {
     background-color : var(--color-body);
-    color            : white;
+    color            : rgb(0, 0, 0);
 }
 
 /* ------------------------------------------------------------------- 
