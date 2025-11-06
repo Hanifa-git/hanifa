@@ -19,7 +19,7 @@
         autoplay: false
     })
     .add({
-        targets: '#loader',
+        targets: '#loader .loader-text',
         opacity: 0,
         duration: 1000,
         begin: function(anim) {
